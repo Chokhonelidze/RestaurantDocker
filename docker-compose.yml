@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  auth1:
+    build: "jwt"
+    ports:
+      - "3001:3001"
+    environment:
+      - DB=mongodb://mongo:27017/app_development
+    image: chokhonelidze/auth:latest
+  apollo: 
+    build: "apollo"
+    ports:
+      - "3000:3000"
+    environment:
+      - DB=mongodb://mongo:27017/app_development
+      - PORT=3000
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    image: chokhonelidze/apollo:latest
+  badbank:
+    build: "BadBank"
+    ports:
+      - "5001:5001"
+    environment:
+      - REACT_APP_SERVER=http://localhost:3000
+      - REACT_APP_LOGINSERVER=http://localhost:3001
+  restaurants: 
+    build: "restaurant"
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - REACT_APP_SERVER=http://localhost:3000
+      - REACT_APP_LOGINSERVER=http://localhost:3001
+  mongo:
+    image: mongo
+
+    ports:
+      - "27017:27017"

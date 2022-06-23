@@ -1,0 +1,12 @@
+[submodule "restaurant"]
+	path = restaurant
+	url = https://github.com/Chokhonelidze/restaurant.git
+[submodule "BadBank"]
+	path = BadBank
+	url = https://github.com/Chokhonelidze/BadBank.git
+[submodule "jwt"]
+	path = jwt
+	url = https://github.com/Chokhonelidze/jwt.git
+[submodule "apollo"]
+	path = apollo
+	url = https://github.com/Chokhonelidze/apollo.git
